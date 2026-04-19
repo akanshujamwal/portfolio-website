@@ -1,4 +1,4 @@
-# 🗂️ My Portfolio — React + Firebase
+# My Portfolio — React + Firebase
 
 A full-stack **React** portfolio website powered by **Firebase**, featuring a fully dynamic **Admin Panel (Phase 1)** that serves as a CMS, and a **Public Portfolio Website (Phase 2)** that consumes all content in real-time.
 
