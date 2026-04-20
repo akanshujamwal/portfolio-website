@@ -9,6 +9,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./shared/components/Navbar";
 import HomePage from "./features/home/pages/HomePage";
+import NotFoundPage from "./features/notfound/pages/NotFoundPage";
 
 // Placeholder pages — we'll build these later
 function ComingSoon({ page }) {
@@ -31,6 +32,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/about" element={<ComingSoon page="About" />} />
         <Route path="/projects" element={<ComingSoon page="Projects" />} />
         <Route path="/blog" element={<ComingSoon page="Blog" />} />
