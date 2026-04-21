@@ -3,7 +3,7 @@
 // Reusing the same skillsData from mockData — single source of truth.
 
 import { useState } from "react";
-import { skillsData } from "../../home/data/mockData";
+import { skillsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function SkillsFull() {

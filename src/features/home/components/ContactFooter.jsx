@@ -2,7 +2,7 @@
 // The contact CTA encourages visitors to reach out.
 // The footer contains social links and copyright.
 
-import { profileData } from "../data/mockData";
+import { profileData } from "../../../data/mockData";
 
 export default function ContactFooter() {
   const year = new Date().getFullYear();

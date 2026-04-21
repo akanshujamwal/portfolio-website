@@ -1,7 +1,7 @@
 // CertificationsPreview — badge-style cards for each certification.
 
 import { Link } from "react-router-dom";
-import { certificationsData } from "../data/mockData";
+import { certificationsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function CertificationsPreview() {

@@ -1,6 +1,6 @@
 // MyValues — 4 value cards explaining the developer's approach and philosophy.
 
-import { aboutData } from "../../home/data/mockData";
+import { aboutData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function MyValues() {

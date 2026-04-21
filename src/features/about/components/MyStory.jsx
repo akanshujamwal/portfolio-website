@@ -1,7 +1,7 @@
 // MyStory — long bio split into paragraphs + fun facts grid.
 // .split('\n\n') splits the story string on double newlines into separate paragraphs.
 
-import { aboutData } from "../../home/data/mockData";
+import { aboutData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function MyStory() {

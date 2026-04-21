@@ -1,7 +1,7 @@
 // BlogPreview — shows top 3 blog posts with a "View All" link.
 
 import { Link } from "react-router-dom";
-import { blogsData } from "../data/mockData";
+import { blogsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function BlogPreview() {

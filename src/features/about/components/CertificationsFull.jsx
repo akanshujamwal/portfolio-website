@@ -1,7 +1,7 @@
 // CertificationsFull — full certifications list on the about page.
 // Shows more detail than the home page preview version.
 
-import { certificationsData } from "../../home/data/mockData";
+import { certificationsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function CertificationsFull() {

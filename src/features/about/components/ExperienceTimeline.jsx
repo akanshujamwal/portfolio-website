@@ -2,7 +2,7 @@
 // The left line + dots are purely CSS — no library needed.
 // endYear === null means the person currently works there → show "Present".
 
-import { experiencesData } from "../../home/data/mockData";
+import { experiencesData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function ExperienceTimeline() {

@@ -2,7 +2,7 @@
 // Not the full About page — just enough to introduce yourself.
 
 import { Link } from "react-router-dom";
-import { aboutData, profileData } from "../data/mockData";
+import { aboutData, profileData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function AboutSnapshot() {

@@ -2,7 +2,7 @@
 // .slice(0, 3) takes only the first 3 items from the array.
 
 import { Link } from "react-router-dom";
-import { projectsData } from "../data/mockData";
+import { projectsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function FeaturedProjects() {

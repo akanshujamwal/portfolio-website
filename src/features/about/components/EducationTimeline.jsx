@@ -2,7 +2,7 @@
 // Same visual pattern as ExperienceTimeline for consistency.
 // endYear === null means still studying → show "Ongoing".
 
-import { educationData } from "../../home/data/mockData";
+import { educationData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function EducationTimeline() {

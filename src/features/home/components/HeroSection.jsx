@@ -1,7 +1,7 @@
 // HeroSection — the first thing a visitor sees.
 // Full-screen section with name, title, bio, CTA buttons, and social links.
 
-import { profileData } from "../data/mockData";
+import { profileData } from "../../../data/mockData";
 
 export default function HeroSection() {
   return (

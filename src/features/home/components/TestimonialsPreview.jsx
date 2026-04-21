@@ -2,7 +2,7 @@
 // avatar initials are generated from the name as a placeholder for real photos.
 
 import { Link } from "react-router-dom";
-import { testimonialsData } from "../data/mockData";
+import { testimonialsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function TestimonialsPreview() {

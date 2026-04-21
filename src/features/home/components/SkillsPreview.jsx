@@ -3,7 +3,7 @@
 // [...new Set()] removes duplicates — here used to get unique category names.
 
 import { useState } from "react";
-import { skillsData } from "../data/mockData";
+import { skillsData } from "../../../data/mockData";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function SkillsPreview() {

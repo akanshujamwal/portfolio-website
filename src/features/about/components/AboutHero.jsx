@@ -1,7 +1,7 @@
 // AboutHero — top banner of the About page.
 // Shows name, title, location, availability and quick social links.
 
-import { profileData } from "../../home/data/mockData";
+import { profileData } from "../../../data/mockData";
 
 export default function AboutHero() {
   return (

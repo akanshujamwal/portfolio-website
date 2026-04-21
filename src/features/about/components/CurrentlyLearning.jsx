@@ -1,7 +1,7 @@
 // CurrentlyLearning — shows what the developer is actively exploring.
 // Also includes a CV download CTA at the bottom.
 
-import { aboutData, profileData } from "../../home/data/mockData";
+import { aboutData, profileData } from "../../../data/mockData";
 
 export default function CurrentlyLearning() {
   return (
