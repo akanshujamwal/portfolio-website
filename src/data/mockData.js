@@ -21,8 +21,7 @@ export const profileData = {
 };
 
 export const aboutData = {
-  description:
-    "I'm a self-taught full-stack developer who loves building things for the web. With a strong foundation in React and Firebase, I focus on writing clean, maintainable code.",
+  description: "I'm a self-taught full-stack developer who loves building things for the web.",
   story: `I started my coding journey back in 2021 with a simple goal — build something people would actually use. What began as curiosity quickly turned into obsession. I spent nights learning HTML, CSS, and JavaScript from YouTube videos and documentation, slowly leveling up to React and eventually the full Firebase ecosystem.
 
 Today, I build production-grade web applications that are fast, scalable, and maintainable. My approach is simple: understand the problem deeply before writing a single line of code. I care deeply about clean architecture, readable code, and experiences that feel effortless to the end user.
@@ -38,10 +37,10 @@ I believe the best developers are lifelong learners. The tech landscape never st
     { emoji: "🔁", fact: "Refactor code more than I write new code" },
   ],
   values: [
-    { icon: "🎯", title: "Clarity Over Cleverness", description: "I write code that the next developer (or future me) can understand without a manual. Simple and readable always wins." },
-    { icon: "🏗️", title: "Architecture First", description: "Before writing code, I think about structure. A well-designed system is easier to build, easier to debug, and easier to scale." },
-    { icon: "🚀", title: "Ship, Then Improve", description: "I believe in getting things in front of users quickly and iterating based on real feedback, rather than perfecting in isolation." },
-    { icon: "📖", title: "Always Learning", description: "The tech world moves fast. I dedicate time every week to learning something new — whether it's a tool, a pattern, or a concept." },
+    { icon: "🎯", title: "Clarity Over Cleverness", description: "I write code that the next developer (or future me) can understand without a manual." },
+    { icon: "🏗️", title: "Architecture First", description: "Before writing code, I think about structure. A well-designed system is easier to build and scale." },
+    { icon: "🚀", title: "Ship, Then Improve", description: "Get things in front of users quickly and iterate based on real feedback." },
+    { icon: "📖", title: "Always Learning", description: "The tech world moves fast. I dedicate time every week to learning something new." },
   ],
 };
 
@@ -52,8 +51,8 @@ export const experiencesData = [
 ];
 
 export const educationData = [
-  { id: 1, school: "University of Mumbai", degree: "B.Sc. in Computer Science", location: "Mumbai, India", website: "https://mu.ac.in", startYear: "2020", endYear: "2023", description: "Focused on data structures, algorithms, and software engineering fundamentals. Built a final year project — a real-time collaborative coding platform.", order: 1 },
-  { id: 2, school: "freeCodeCamp & Self Study", degree: "Web Development Curriculum", location: "Online", website: "https://freecodecamp.org", startYear: "2021", endYear: "2022", description: "Completed 300+ hours of hands-on web development training covering responsive design, JavaScript algorithms, React, and APIs.", order: 2 },
+  { id: 1, school: "University of Mumbai", degree: "B.Sc. in Computer Science", location: "Mumbai, India", website: "https://mu.ac.in", startYear: "2020", endYear: "2023", description: "Focused on data structures, algorithms, and software engineering fundamentals.", order: 1 },
+  { id: 2, school: "freeCodeCamp & Self Study", degree: "Web Development Curriculum", location: "Online", website: "https://freecodecamp.org", startYear: "2021", endYear: "2022", description: "Completed 300+ hours of hands-on web development training.", order: 2 },
 ];
 
 export const skillsData = [
@@ -72,9 +71,110 @@ export const skillsData = [
 ];
 
 export const projectsData = [
-  { id: 1, title: "Portfolio CMS", overview: "A dynamic content management system built with React and Firebase. Allows managing portfolio data in real-time without touching code.", technologies: ["React", "Firebase", "Tailwind"], demoLink: "#", sourceLink: "#", isCompany: false },
-  { id: 2, title: "E-Commerce Platform", overview: "Full-stack e-commerce solution with real-time inventory management, Stripe payment integration, and an admin dashboard.", technologies: ["React", "Node.js", "MongoDB"], demoLink: "#", sourceLink: "#", isCompany: true },
-  { id: 3, title: "Task Management App", overview: "Collaborative task manager with drag-and-drop Kanban boards, team assignments, priority tags, and deadline tracking.", technologies: ["React", "Firebase", "React DnD"], demoLink: "#", sourceLink: "#", isCompany: false },
+  {
+    id: 1,
+    title: "Portfolio CMS",
+    overview: "A dynamic content management system built with React and Firebase. Allows managing portfolio data in real-time without touching code. Features full CRUD for all sections, media uploads, and role-based access.",
+    description: `This project was born out of the need to manage portfolio content without touching code every time something changed.
+
+The Admin Panel is a full-featured CMS built on top of Firebase — Firestore for data, Firebase Storage for media, and Firebase Auth for secure admin-only access.
+
+Key decisions made during development include using feature-based architecture to keep the codebase scalable, and a service layer pattern to keep Firebase logic out of UI components.
+
+The public portfolio site consumes all Firestore data in real time, meaning any change in the admin panel reflects on the live site within seconds.`,
+    technologies: ["React", "Firebase", "Tailwind CSS", "Firestore", "Firebase Auth"],
+    category: "Frontend",
+    demoLink: "#",
+    sourceLink: "#",
+    isCompany: false,
+    status: "In Progress",
+    year: "2026",
+  },
+  {
+    id: 2,
+    title: "E-Commerce Platform",
+    overview: "Full-stack e-commerce solution with real-time inventory management, Stripe payment integration, and a comprehensive admin dashboard for order and product management.",
+    description: `Built end-to-end for a retail client who needed a scalable online store with real-time inventory tracking.
+
+The platform handles product catalog management, cart and checkout flows, Stripe payment processing, and order tracking. The admin dashboard gives the client full control over products, orders, and customer data.
+
+Performance was a key focus — implemented lazy loading, image optimization, and server-side caching to achieve a 95+ Lighthouse score.`,
+    technologies: ["React", "Node.js", "MongoDB", "Stripe", "Express"],
+    category: "Backend",
+    demoLink: "#",
+    sourceLink: "#",
+    isCompany: true,
+    status: "Completed",
+    year: "2025",
+  },
+  {
+    id: 3,
+    title: "Task Management App",
+    overview: "Collaborative task manager with drag-and-drop Kanban boards, real-time team assignments, priority tags, and deadline tracking with email notifications.",
+    description: `A productivity tool built for a remote team that needed a simple but powerful task management solution without the overhead of tools like Jira.
+
+Features include drag-and-drop Kanban boards, real-time updates via Firebase, team member assignments, priority levels, due dates, and automated email reminders for overdue tasks.
+
+The real-time collaboration aspect — where multiple users can update the board simultaneously and see changes instantly — was the most technically interesting challenge to solve.`,
+    technologies: ["React", "Firebase", "Tailwind CSS", "React DnD"],
+    category: "Frontend",
+    demoLink: "#",
+    sourceLink: "#",
+    isCompany: false,
+    status: "Completed",
+    year: "2025",
+  },
+  {
+    id: 4,
+    title: "Restaurant Booking System",
+    overview: "Online table reservation system with real-time availability, SMS confirmations, and a restaurant admin panel for managing bookings, tables, and time slots.",
+    description: `Designed and built for a local restaurant chain that was managing bookings manually via phone calls.
+
+The system allows customers to view real-time table availability and book instantly. Restaurant staff get an admin panel to manage reservations, mark tables as occupied, and send SMS confirmations via Twilio.
+
+Reduced no-shows by 35% through automated reminder SMS sent 2 hours before each reservation.`,
+    technologies: ["React", "Node.js", "PostgreSQL", "Twilio", "Tailwind CSS"],
+    category: "Backend",
+    demoLink: "#",
+    sourceLink: null,
+    isCompany: true,
+    status: "Completed",
+    year: "2024",
+  },
+  {
+    id: 5,
+    title: "Design System & UI Kit",
+    overview: "A comprehensive design system built in Figma and implemented in React — includes 40+ components, dark/light themes, accessibility guidelines, and full Storybook documentation.",
+    description: `Started as an internal project to standardize UI components across multiple products at a company.
+
+The design system includes a Figma component library, a React component library published as an npm package, Storybook documentation, and accessibility guidelines following WCAG 2.1 AA standards.
+
+Reduced UI development time by 60% across teams by providing ready-to-use, well-documented components.`,
+    technologies: ["React", "Figma", "Storybook", "TypeScript", "CSS Modules"],
+    category: "UI/UX",
+    demoLink: "#",
+    sourceLink: "#",
+    isCompany: true,
+    status: "Completed",
+    year: "2024",
+  },
+  {
+    id: 6,
+    title: "Weather Dashboard",
+    overview: "A beautiful weather dashboard with 7-day forecasts, hourly breakdowns, location search, and animated weather visualizations using D3.js.",
+    description: `A personal project to explore data visualization and API integration.
+
+Fetches real-time weather data from the OpenWeatherMap API and visualizes it with animated D3.js charts — temperature curves, precipitation bars, and wind direction indicators.
+
+Supports geolocation for automatic local weather, city search with autocomplete, and saves favorite locations to localStorage.`,
+    technologies: ["React", "D3.js", "OpenWeatherMap API", "Tailwind CSS"],
+    category: "Frontend",
+    demoLink: "#",
+    sourceLink: "#",
+    isCompany: false,
+    status: "Completed",
+    year: "2024",
+  },
 ];
 
 export const blogsData = [
@@ -94,29 +194,13 @@ First, create a project in the Firebase console. Once that's done, install the F
 npm install firebase
 \`\`\`
 
-Then create a firebase.js config file:
-
-\`\`\`javascript
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  projectId: "YOUR_PROJECT_ID",
-};
-
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-\`\`\`
+Then create a firebase.js config file and initialize the app with your project config.
 
 ## Reading Data
 
 Use getDocs to fetch a collection:
 
 \`\`\`javascript
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase";
-
 const querySnapshot = await getDocs(collection(db, "projects"));
 const projects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 \`\`\`
@@ -146,42 +230,19 @@ Firestore is one of the easiest databases to get started with. The real-time syn
     excerpt: "A deep dive into organizing your React app by feature instead of file type — and why it makes your codebase scale without pain.",
     content: `## The Problem with Traditional Structure
 
-Most React tutorials teach you to organize by file type — components/, hooks/, services/. This works fine for small apps, but falls apart fast when your codebase grows.
+Most React tutorials teach you to organize by file type. This works fine for small apps, but falls apart fast when your codebase grows.
 
 ## The Feature-Based Approach
 
-Instead of grouping by file type, group everything by feature:
-
-\`\`\`
-src/
-├── features/
-│   ├── auth/
-│   │   ├── components/
-│   │   ├── hooks/
-│   │   ├── services/
-│   │   └── pages/
-│   ├── projects/
-│   └── blog/
-\`\`\`
+Instead of grouping by file type, group everything by feature. Every file related to a feature lives together.
 
 ## Why It Works
 
-Every file related to a feature lives together. When you work on authentication, you open the auth/ folder and everything you need is right there.
-
-## Shared Code
-
-For truly reusable code, use a shared/ folder:
-
-\`\`\`
-src/
-├── shared/
-│   ├── components/
-│   └── hooks/
-\`\`\`
+When you work on authentication, you open the auth/ folder and everything you need is right there. No more jumping between components/, hooks/, and services/ folders.
 
 ## Conclusion
 
-Feature-based architecture is the single biggest improvement you can make to your React project structure. Start with it from day one — retrofitting it later is painful.`,
+Feature-based architecture is the single biggest improvement you can make to your React project structure. Start with it from day one.`,
     tags: ["React", "Architecture", "Best Practices"],
     publishedAt: "February 22, 2026",
     readTime: "7 min read",
@@ -195,32 +256,22 @@ Feature-based architecture is the single biggest improvement you can make to you
 
 Tailwind CSS has become the go-to utility framework for production UIs. Here are 10 patterns I use in every project.
 
-## 1. Dark Theme Base
-
-Set your base background and text on the body element using Tailwind's gray scale. gray-950 for background, gray-100 for default text.
-
-## 2. Glass Card Effect
+## 1. Glass Card Effect
 
 \`\`\`html
 <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6">
 \`\`\`
 
-## 3. Gradient Text
+## 2. Gradient Text
 
 \`\`\`html
 <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
 \`\`\`
 
-## 4. Responsive Grid
+## 3. Responsive Grid
 
 \`\`\`html
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-\`\`\`
-
-## 5. Hover Card Lift
-
-\`\`\`html
-<div class="hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
 \`\`\`
 
 ## Conclusion

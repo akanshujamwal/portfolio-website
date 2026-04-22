@@ -7,6 +7,10 @@ import ContactPage from "./features/contact/pages/ContactPage";
 import TestimonialsPage from "./features/testimonials/pages/TestimonialsPage";
 import BlogPage from "./features/blog/pages/BlogPage";
 import BlogPostPage from "./features/blog/pages/BlogPostPage";
+import ProjectsPage from "./features/projects/pages/ProjectsPage";
+import ProjectDetailPage from "./features/projects/pages/ProjectDetailPage";
+
+
 function ComingSoon({ page }) {
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center">
@@ -26,7 +30,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/projects" element={<ComingSoon page="Projects" />} />
+
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/projects/:id" element={<ProjectDetailPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogPostPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
