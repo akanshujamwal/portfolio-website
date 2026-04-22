@@ -3,7 +3,8 @@ import Navbar from "./shared/components/Navbar";
 import HomePage from "./features/home/pages/HomePage";
 import AboutPage from "./features/about/pages/AboutPage";
 import NotFoundPage from "./features/notfound/pages/NotFoundPage";
-
+import ContactPage from "./features/contact/pages/ContactPage";
+import TestimonialsPage from "./features/testimonials/pages/TestimonialsPage";
 function ComingSoon({ page }) {
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center">
@@ -26,8 +27,8 @@ function App() {
         <Route path="/projects" element={<ComingSoon page="Projects" />} />
         <Route path="/blog" element={<ComingSoon page="Blog" />} />
         <Route path="/blog/:id" element={<ComingSoon page="Blog Post" />} />
-        <Route path="/testimonials" element={<ComingSoon page="Testimonials" />} />
-        <Route path="/contact" element={<ComingSoon page="Contact" />} />
+        <Route path="/testimonials" element={<TestimonialsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
