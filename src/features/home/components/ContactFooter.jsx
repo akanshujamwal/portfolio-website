@@ -1,11 +1,21 @@
-// ContactFooter — contact CTA section + footer in one component.
-// The contact CTA encourages visitors to reach out.
-// The footer contains social links and copyright.
-
-import { profileData } from "../../../data/mockData";
+import { useProfile, useContact } from "../../../core/firebase/useFirestore";
 
 export default function ContactFooter() {
+  const { data: profile } = useProfile();
+  const { data: contact } = useContact();
   const year = new Date().getFullYear();
+
+  const email    = profile?.email    || contact?.email    || "";
+  const phone    = profile?.phone    || contact?.phone    || "";
+  const location = profile?.location || contact?.location || "";
+  const name     = profile?.name     || "";
+  const meetingLink      = contact?.calendlyUrl || contact?.meetingLink || null;
+  const availabilityText = profile?.isAvailable ? "open to new opportunities" : "currently busy";
+
+  // socialLinks in ContactModel is an array; in ProfileModel is an object
+  const socialLinksArray = Array.isArray(contact?.socialLinks)
+    ? contact.socialLinks
+    : Object.entries(profile?.socialLinks ?? {}).map(([platform, url]) => ({ platform, url, displayName: platform }));
 
   return (
     <>
@@ -20,34 +30,34 @@ export default function ContactFooter() {
               Have a project in mind?
             </h2>
             <p className="text-gray-400 text-base max-w-xl mx-auto mb-8 leading-relaxed">
-              I'm currently {profileData.availability.toLowerCase()}. Whether it's a freelance
+              I'm currently {availabilityText}. Whether it's a freelance
               project, full-time opportunity, or just a chat — feel free to reach out.
             </p>
 
             {/* Contact details */}
             <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm text-gray-400">
-              <a href={`mailto:${profileData.email}`} className="hover:text-indigo-400 transition-colors">
-                ✉ {profileData.email}
-              </a>
-              {profileData.phone && (
-                <span>📞 {profileData.phone}</span>
+              {email && (
+                <a href={`mailto:${email}`} className="hover:text-indigo-400 transition-colors">
+                  ✉ {email}
+                </a>
               )}
-              {profileData.location && (
-                <span>📍 {profileData.location}</span>
-              )}
+              {phone && <span>📞 {phone}</span>}
+              {location && <span>📍 {location}</span>}
             </div>
 
             {/* CTA buttons */}
             <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href={`mailto:${profileData.email}`}
-                className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25"
-              >
-                Send an Email
-              </a>
-              {profileData.meetingLink && (
+              {email && (
                 <a
-                  href={profileData.meetingLink}
+                  href={`mailto:${email}`}
+                  className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25"
+                >
+                  Send an Email
+                </a>
+              )}
+              {meetingLink && (
+                <a
+                  href={meetingLink}
                   target="_blank"
                   rel="noreferrer"
                   className="border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200"
@@ -68,28 +78,30 @@ export default function ContactFooter() {
             {/* Logo */}
             <span className="text-white font-bold text-lg tracking-tight">
               <span className="text-indigo-400">&lt;</span>
-              {profileData.name.split(" ")[0]}
+              {name.split(" ")[0]}
               <span className="text-indigo-400">/&gt;</span>
             </span>
 
             {/* Social links */}
-            <div className="flex items-center gap-6">
-              {Object.entries(profileData.socialLinks).map(([platform, url]) => (
-                <a
-                  key={platform}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-gray-500 hover:text-indigo-400 text-sm capitalize transition-colors"
-                >
-                  {platform}
-                </a>
-              ))}
-            </div>
+            {socialLinksArray.length > 0 && (
+              <div className="flex items-center gap-6">
+                {socialLinksArray.map((link) => (
+                  <a
+                    key={link.platform || link.displayName}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-500 hover:text-indigo-400 text-sm capitalize transition-colors"
+                  >
+                    {link.displayName || link.platform}
+                  </a>
+                ))}
+              </div>
+            )}
 
             {/* Copyright */}
             <p className="text-gray-600 text-sm">
-              © {year} {profileData.name}. All rights reserved.
+              © {year} {name}. All rights reserved.
             </p>
           </div>
         </div>

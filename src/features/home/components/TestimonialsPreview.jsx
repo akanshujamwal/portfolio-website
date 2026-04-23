@@ -1,12 +1,30 @@
-// TestimonialsPreview — 3 testimonial cards + View All link.
-// avatar initials are generated from the name as a placeholder for real photos.
-
 import { Link } from "react-router-dom";
-import { testimonialsData } from "../../../data/mockData";
+import { useTestimonials } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function TestimonialsPreview() {
-  const featured = testimonialsData.slice(0, 3);
+  const { data: testimonials, loading } = useTestimonials();
+
+  if (loading) {
+    return (
+      <section id="testimonials" className="bg-gray-900 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            label="Kind Words"
+            title="What People Say"
+            subtitle="Feedback from clients and colleagues I've had the pleasure of working with."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 animate-pulse">
+            {[...Array(3)].map((_, i) => <div key={i} className="h-52 bg-gray-800 rounded-xl" />)}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!testimonials?.length) return null;
+
+  const featured = testimonials.slice(0, 3);
 
   return (
     <section id="testimonials" className="bg-gray-900 py-20 sm:py-28">
@@ -35,13 +53,16 @@ export default function TestimonialsPreview() {
 
               {/* Author */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-800">
-                {/* Avatar initials */}
-                <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-                  {t.avatar}
-                </div>
+                {t.avatarUrl ? (
+                  <img src={t.avatarUrl} alt={t.name} className="w-10 h-10 rounded-full object-cover flex-shrink-0" />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                    {t.initials}
+                  </div>
+                )}
                 <div>
                   <p className="text-white text-sm font-semibold">{t.name}</p>
-                  <p className="text-gray-500 text-xs">{t.role}</p>
+                  <p className="text-gray-500 text-xs">{t.roleWithCompany}</p>
                 </div>
                 {t.linkedinUrl && (
                   <a

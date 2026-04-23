@@ -1,21 +1,49 @@
-// SkillsPreview — displays all skills grouped by category.
-// .filter() is a JavaScript array method — it keeps only items that match a condition.
-// [...new Set()] removes duplicates — here used to get unique category names.
-
 import { useState } from "react";
-import { skillsData } from "../../../data/mockData";
+import { useSkills } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
+function SkillIcon({ skill }) {
+  if (skill.iconUrl) {
+    return <img src={skill.iconUrl} alt={skill.name} className="w-8 h-8 object-contain" />;
+  }
+  return (
+    <span className="w-8 h-8 flex items-center justify-center bg-indigo-500/20 rounded-md text-indigo-300 text-xs font-bold">
+      {skill.name.slice(0, 2).toUpperCase()}
+    </span>
+  );
+}
+
 export default function SkillsPreview() {
-  // Get unique categories from the skills list
-  const categories = ["All", ...new Set(skillsData.map((s) => s.category))];
+  const { data: skills, loading } = useSkills();
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // Filter skills based on selected category
+  if (loading) {
+    return (
+      <section id="skills" className="bg-gray-950 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            label="What I Work With"
+            title="Skills & Technologies"
+            subtitle="Tools and technologies I use to build fast, scalable, and maintainable products."
+          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 animate-pulse">
+            {[...Array(12)].map((_, i) => (
+              <div key={i} className="h-24 bg-gray-800 rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!skills?.length) return null;
+
+  const categories = ["All", ...new Set(skills.map((s) => s.category))];
+
   const filteredSkills =
     activeCategory === "All"
-      ? skillsData
-      : skillsData.filter((s) => s.category === activeCategory);
+      ? skills
+      : skills.filter((s) => s.category === activeCategory);
 
   return (
     <section id="skills" className="bg-gray-950 py-20 sm:py-28">
@@ -51,7 +79,7 @@ export default function SkillsPreview() {
               key={skill.id}
               className="bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl p-4 flex flex-col items-center gap-2 text-center transition-all duration-200 hover:bg-gray-800/80 group"
             >
-              <span className="text-3xl">{skill.icon}</span>
+              <SkillIcon skill={skill} />
               <span className="text-gray-300 group-hover:text-white text-xs font-medium transition-colors">
                 {skill.name}
               </span>

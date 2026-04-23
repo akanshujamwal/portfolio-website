@@ -4,12 +4,12 @@ import HomePage from "./features/home/pages/HomePage";
 import AboutPage from "./features/about/pages/AboutPage";
 import NotFoundPage from "./features/notfound/pages/NotFoundPage";
 import ContactPage from "./features/contact/pages/ContactPage";
-import TestimonialsPage from "./features/testimonials/pages/TestimonialsPage";
+import TestimonialsPage from "./features/testimonial/pages/TestimonialsPage";
 import BlogPage from "./features/blog/pages/BlogPage";
 import BlogPostPage from "./features/blog/pages/BlogPostPage";
 import ProjectsPage from "./features/projects/pages/ProjectsPage";
 import ProjectDetailPage from "./features/projects/pages/ProjectDetailPage";
-
+import FirebaseDataPrinter from "./FirebaseDataPrinter";
 
 function ComingSoon({ page }) {
   return (
@@ -26,6 +26,7 @@ function ComingSoon({ page }) {
 function App() {
   return (
     <BrowserRouter>
+    <FirebaseDataPrinter />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />

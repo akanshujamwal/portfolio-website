@@ -1,11 +1,28 @@
-// BlogPreview — shows top 3 blog posts with a "View All" link.
-
 import { Link } from "react-router-dom";
-import { blogsData } from "../../../data/mockData";
+import { useFeaturedBlogs } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function BlogPreview() {
-  const featured = blogsData.slice(0, 3);
+  const { data: posts, loading } = useFeaturedBlogs();
+
+  if (loading) {
+    return (
+      <section id="blog" className="bg-gray-950 py-20 sm:py-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            label="My Writing"
+            title="Latest Blog Posts"
+            subtitle="Thoughts on development, architecture, and the tools I use every day."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 animate-pulse">
+            {[...Array(3)].map((_, i) => <div key={i} className="h-72 bg-gray-800 rounded-xl" />)}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (!posts?.length) return null;
 
   return (
     <section id="blog" className="bg-gray-950 py-20 sm:py-28">
@@ -19,22 +36,26 @@ export default function BlogPreview() {
 
         {/* ── Blog Cards ────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {featured.map((post) => (
+          {posts.map((post) => (
             <Link
               to={`/blog/${post.id}`}
               key={post.id}
               className="bg-gray-900 border border-gray-800 hover:border-indigo-500/50 rounded-xl overflow-hidden flex flex-col transition-all duration-200 hover:shadow-xl hover:shadow-indigo-500/5 group"
             >
-              {/* Banner placeholder */}
-              <div className="h-44 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center">
-                <span className="text-4xl">📰</span>
-              </div>
+              {/* Banner */}
+              {post.bannerUrl ? (
+                <img src={post.bannerUrl} alt={post.title} className="h-44 w-full object-cover" />
+              ) : (
+                <div className="h-44 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center">
+                  <span className="text-4xl">📰</span>
+                </div>
+              )}
 
               <div className="p-6 flex flex-col gap-3 flex-1">
                 {/* Meta */}
                 <div className="flex items-center justify-between text-xs text-gray-500">
                   <span>{post.publishedAt}</span>
-                  <span>{post.readTime}</span>
+                  {post.readTime && <span>{post.readTime}</span>}
                 </div>
 
                 {/* Title */}
