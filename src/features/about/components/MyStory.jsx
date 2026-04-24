@@ -18,7 +18,7 @@ function renderFunFact(item, i) {
 }
 
 export default function MyStory() {
-  const { data: about, loading } = useAbout();
+  const { data: about, loading, error } = useAbout();
 
   if (loading) {
     return (
@@ -43,7 +43,7 @@ export default function MyStory() {
     );
   }
 
-  if (!about) return null;
+  if (error || !about) return null;
 
   const paragraphs = (about.bio || "").split("\n\n").filter(Boolean);
 

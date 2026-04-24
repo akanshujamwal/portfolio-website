@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTestimonials } from "../../../core/firebase/useFirestore";
 
 export default function TestimonialsPage() {
-  const { data: testimonials, loading } = useTestimonials();
+  const { data: testimonials, loading, error } = useTestimonials();
   const [selected, setSelected] = useState(null);
 
   function openModal(t)  { setSelected(t); }
@@ -29,7 +29,7 @@ export default function TestimonialsPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-3 gap-6 text-center">
             {[
-              { number: loading ? "—" : `${testimonials?.length ?? 0}+`, label: "Testimonials" },
+              { number: (loading || error) ? "—" : `${testimonials?.length ?? 0}+`, label: "Testimonials" },
               { number: "100%", label: "Satisfaction Rate" },
               { number: "5★",  label: "Average Rating"   },
             ].map((stat) => (
@@ -48,6 +48,18 @@ export default function TestimonialsPage() {
           {loading ? (
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 animate-pulse">
               {[...Array(6)].map((_, i) => <div key={i} className="h-52 bg-gray-800 rounded-xl break-inside-avoid" />)}
+            </div>
+          ) : error ? (
+            <div className="text-center py-24">
+              <p className="text-5xl mb-4">⚠️</p>
+              <h3 className="text-white text-xl font-semibold mb-2">Failed to load testimonials</h3>
+              <p className="text-gray-500 text-sm mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors"
+              >
+                Try again
+              </button>
             </div>
           ) : !testimonials?.length ? (
             <div className="text-center py-24">

@@ -10,7 +10,7 @@ const statusColors = {
 };
 
 export default function FeaturedProjects() {
-  const { data: projects, loading } = useFeaturedProjects();
+  const { data: projects, loading, error } = useFeaturedProjects();
 
   if (loading) {
     return (
@@ -29,7 +29,7 @@ export default function FeaturedProjects() {
     );
   }
 
-  if (!projects?.length) return null;
+  if (error || !projects?.length) return null;
 
   return (
     <section id="projects" className="bg-gray-900 py-20 sm:py-28">

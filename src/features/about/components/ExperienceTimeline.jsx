@@ -2,7 +2,7 @@ import { useExperiences } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function ExperienceTimeline() {
-  const { data: experiences, loading } = useExperiences();
+  const { data: experiences, loading, error } = useExperiences();
 
   if (loading) {
     return (
@@ -17,7 +17,7 @@ export default function ExperienceTimeline() {
     );
   }
 
-  if (!experiences?.length) return null;
+  if (error || !experiences?.length) return null;
 
   return (
     <section className="bg-gray-900 py-20 sm:py-28">

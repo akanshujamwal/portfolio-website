@@ -3,7 +3,7 @@ import { useFeaturedBlogs } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function BlogPreview() {
-  const { data: posts, loading } = useFeaturedBlogs();
+  const { data: posts, loading, error } = useFeaturedBlogs();
 
   if (loading) {
     return (
@@ -22,7 +22,7 @@ export default function BlogPreview() {
     );
   }
 
-  if (!posts?.length) return null;
+  if (error || !posts?.length) return null;
 
   return (
     <section id="blog" className="bg-gray-950 py-20 sm:py-28">

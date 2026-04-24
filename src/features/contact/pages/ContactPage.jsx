@@ -57,7 +57,6 @@ export default function ContactPage() {
       setSuccess(true);
       setForm({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
-      console.log("EmailJS error:", err);
       setError("Something went wrong. Please try again or email me directly.");
     } finally {
       setLoading(false);

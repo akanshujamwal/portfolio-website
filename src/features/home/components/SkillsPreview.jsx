@@ -14,7 +14,7 @@ function SkillIcon({ skill }) {
 }
 
 export default function SkillsPreview() {
-  const { data: skills, loading } = useSkills();
+  const { data: skills, loading, error } = useSkills();
   const [activeCategory, setActiveCategory] = useState("All");
 
   if (loading) {
@@ -36,7 +36,7 @@ export default function SkillsPreview() {
     );
   }
 
-  if (!skills?.length) return null;
+  if (error || !skills?.length) return null;
 
   const categories = ["All", ...new Set(skills.map((s) => s.category))];
 

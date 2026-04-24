@@ -66,7 +66,7 @@ function ListRow({ post }) {
 }
 
 export default function BlogPage() {
-  const { data: blogs, loading } = useBlogs();
+  const { data: blogs, loading, error } = useBlogs();
   const [view,      setView]      = useState("grid");
   const [activeTag, setActiveTag] = useState("All");
   const [search,    setSearch]    = useState("");
@@ -166,12 +166,24 @@ export default function BlogPage() {
       <section className="py-12 pb-28">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-gray-500 text-sm mb-6">
-            {loading ? "Loading…" : `${filtered.length} ${filtered.length === 1 ? "post" : "posts"} found`}
+            {loading ? "Loading…" : error ? "—" : `${filtered.length} ${filtered.length === 1 ? "post" : "posts"} found`}
           </p>
 
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
               {[...Array(6)].map((_, i) => <div key={i} className="h-72 bg-gray-800 rounded-xl" />)}
+            </div>
+          ) : error ? (
+            <div className="text-center py-24">
+              <p className="text-5xl mb-4">⚠️</p>
+              <h3 className="text-white text-xl font-semibold mb-2">Failed to load posts</h3>
+              <p className="text-gray-500 text-sm mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors"
+              >
+                Try again
+              </button>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-24">

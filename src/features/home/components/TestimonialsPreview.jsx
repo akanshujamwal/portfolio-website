@@ -3,7 +3,7 @@ import { useTestimonials } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function TestimonialsPreview() {
-  const { data: testimonials, loading } = useTestimonials();
+  const { data: testimonials, loading, error } = useTestimonials();
 
   if (loading) {
     return (
@@ -22,7 +22,7 @@ export default function TestimonialsPreview() {
     );
   }
 
-  if (!testimonials?.length) return null;
+  if (error || !testimonials?.length) return null;
 
   const featured = testimonials.slice(0, 3);
 

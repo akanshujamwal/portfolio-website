@@ -2,7 +2,7 @@ import { useCertifications } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function CertificationsPreview() {
-  const { data: certifications, loading } = useCertifications();
+  const { data: certifications, loading, error } = useCertifications();
 
   if (loading) {
     return (
@@ -21,7 +21,7 @@ export default function CertificationsPreview() {
     );
   }
 
-  if (!certifications?.length) return null;
+  if (error || !certifications?.length) return null;
 
   return (
     <section id="certifications" className="bg-gray-950 py-20 sm:py-28">

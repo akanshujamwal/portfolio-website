@@ -30,7 +30,7 @@ function renderHighlight(item, i) {
 }
 
 export default function MyValues() {
-  const { data: about, loading } = useAbout();
+  const { data: about, loading, error } = useAbout();
 
   if (loading) {
     return (
@@ -45,7 +45,7 @@ export default function MyValues() {
     );
   }
 
-  if (!about) return null;
+  if (error || !about) return null;
 
   // Use careerHighlights if available; fall back to personalInterests
   const items = about.careerHighlights?.length

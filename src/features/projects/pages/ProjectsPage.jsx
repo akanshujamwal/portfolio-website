@@ -106,7 +106,7 @@ function ListRow({ project }) {
 }
 
 export default function ProjectsPage() {
-  const { data: projects, loading } = useProjects();
+  const { data: projects, loading, error } = useProjects();
   const [view,     setView]     = useState("grid");
   const [type,     setType]     = useState("All");
   const [category, setCategory] = useState("All");
@@ -153,10 +153,10 @@ export default function ProjectsPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-4 gap-4 text-center">
             {[
-              { number: loading ? "—" : (projects?.length ?? 0), label: "Total Projects" },
-              { number: loading ? "—" : totalPersonal,           label: "Personal"       },
-              { number: loading ? "—" : totalCompany,            label: "Company"        },
-              { number: loading ? "—" : totalDone,               label: "Completed"      },
+              { number: (loading || error) ? "—" : (projects?.length ?? 0), label: "Total Projects" },
+              { number: (loading || error) ? "—" : totalPersonal,           label: "Personal"       },
+              { number: (loading || error) ? "—" : totalCompany,            label: "Company"        },
+              { number: (loading || error) ? "—" : totalDone,               label: "Completed"      },
             ].map((s) => (
               <div key={s.label}>
                 <p className="text-xl sm:text-2xl font-bold text-indigo-400">{s.number}</p>
@@ -265,6 +265,18 @@ export default function ProjectsPage() {
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
               {[...Array(6)].map((_, i) => <div key={i} className="h-64 bg-gray-800 rounded-xl" />)}
+            </div>
+          ) : error ? (
+            <div className="text-center py-24">
+              <p className="text-5xl mb-4">⚠️</p>
+              <h3 className="text-white text-xl font-semibold mb-2">Failed to load projects</h3>
+              <p className="text-gray-500 text-sm mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-indigo-400 hover:text-indigo-300 text-sm font-medium transition-colors"
+              >
+                Try again
+              </button>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-24">

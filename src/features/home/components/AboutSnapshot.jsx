@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useAbout, useProfile } from "../../../core/firebase/useFirestore";
 
 export default function AboutSnapshot() {
-  const { data: profile, loading: profileLoading } = useProfile();
-  const { data: about,   loading: aboutLoading   } = useAbout();
+  const { data: profile, loading: profileLoading, error: profileError } = useProfile();
+  const { data: about,   loading: aboutLoading,   error: aboutError   } = useAbout();
 
   if (profileLoading || aboutLoading) {
     return (
@@ -26,7 +26,7 @@ export default function AboutSnapshot() {
     );
   }
 
-  if (!about || !profile) return null;
+  if (profileError || aboutError || !about || !profile) return null;
 
   const yearsOfExp = about.yearsOfExperience || 0;
 

@@ -2,7 +2,7 @@ import { useEducation } from "../../../core/firebase/useFirestore";
 import SectionHeader from "../../../shared/components/SectionHeader";
 
 export default function EducationTimeline() {
-  const { data: education, loading } = useEducation();
+  const { data: education, loading, error } = useEducation();
 
   if (loading) {
     return (
@@ -17,7 +17,7 @@ export default function EducationTimeline() {
     );
   }
 
-  if (!education?.length) return null;
+  if (error || !education?.length) return null;
 
   return (
     <section className="bg-gray-950 py-20 sm:py-28">

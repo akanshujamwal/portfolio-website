@@ -1,7 +1,7 @@
 import { useProfile, useContact } from "../../../core/firebase/useFirestore";
 
 export default function AboutHero() {
-  const { data: profile, loading: profileLoading } = useProfile();
+  const { data: profile, loading: profileLoading, error: profileError } = useProfile();
   const { data: contact, loading: contactLoading  } = useContact();
 
   if (profileLoading || contactLoading) {
@@ -21,7 +21,7 @@ export default function AboutHero() {
     );
   }
 
-  if (!profile) return null;
+  if (profileError || !profile) return null;
 
   const isAvailable     = profile.isAvailable;
   const availabilityText = isAvailable ? "Open to Work" : "Currently Busy";
