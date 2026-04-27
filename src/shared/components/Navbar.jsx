@@ -4,7 +4,7 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { profileData } from "../../data/mockData";
+import { useProfile } from "../../core/firebase/useFirestore";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -16,8 +16,11 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  // useLocation gives us the current URL path so we can highlight the active link.
   const location = useLocation();
+  const { data: profile } = useProfile();
+
+  const firstName = profile?.name?.split(" ")[0] ?? "";
+  const cvUrl     = profile?.cvUrl ?? null;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-950/90 backdrop-blur-md border-b border-gray-800">
@@ -27,7 +30,7 @@ export default function Navbar() {
           {/* ── Logo ─────────────────────────────── */}
           <Link to="/" className="text-white font-bold text-xl tracking-tight">
             <span className="text-indigo-400">&lt;</span>
-            {profileData.name.split(" ")[0]}
+            {firstName}
             <span className="text-indigo-400">/&gt;</span>
           </Link>
 
@@ -46,12 +49,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href={profileData.cvUrl}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors duration-200"
-            >
-              Download CV
-            </a>
+            {cvUrl && (
+              <a
+                href={cvUrl}
+                className="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors duration-200"
+              >
+                Download CV
+              </a>
+            )}
           </div>
 
           {/* ── Mobile Hamburger ──────────────────── */}
@@ -85,12 +90,14 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <a
-              href={profileData.cvUrl}
-              className="bg-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded-lg w-fit"
-            >
-              Download CV
-            </a>
+            {cvUrl && (
+              <a
+                href={cvUrl}
+                className="bg-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded-lg w-fit"
+              >
+                Download CV
+              </a>
+            )}
           </div>
         )}
       </div>

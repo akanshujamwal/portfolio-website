@@ -150,6 +150,7 @@ export default function ProjectDetailPage() {
                 <div className="flex flex-col gap-3">
                   {[
                     { label: "Type",     value: project.isCompany ? "Company" : "Personal" },
+                    { label: "Company",  value: project.companyName || null },
                     { label: "Category", value: project.category   },
                     { label: "Date",     value: dateLabel           },
                     { label: "Status",   value: project.statusLabel },

@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { useAbout, useProfile } from "../../../core/firebase/useFirestore";
+import { useAbout, useProfile, useProjects, useExperiences } from "../../../core/firebase/useFirestore";
 
 export default function AboutSnapshot() {
-  const { data: profile, loading: profileLoading, error: profileError } = useProfile();
-  const { data: about,   loading: aboutLoading,   error: aboutError   } = useAbout();
+  const { data: profile,     loading: profileLoading, error: profileError } = useProfile();
+  const { data: about,       loading: aboutLoading,   error: aboutError   } = useAbout();
+  const { data: projects                                                   } = useProjects();
+  const { data: experiences                                                } = useExperiences();
 
   if (profileLoading || aboutLoading) {
     return (
@@ -28,13 +30,15 @@ export default function AboutSnapshot() {
 
   if (profileError || aboutError || !about || !profile) return null;
 
-  const yearsOfExp = about.yearsOfExperience || 0;
+  const yearsOfExp    = about.yearsOfExperience || 0;
+  const projectCount  = projects?.length   ?? 0;
+  const companyCount  = experiences?.length ?? 0;
 
   const stats = [
-    { number: "10+",                 label: "Projects Built" },
-    { number: `${yearsOfExp}+`,      label: "Years of Coding" },
-    { number: "5+",                  label: "Happy Clients" },
-    { number: "4+",                  label: "Certifications" },
+    { number: projectCount ? `${projectCount}+` : "10+", label: "Projects Built"    },
+    { number: `${yearsOfExp}+`,                          label: "Years of Coding"   },
+    { number: companyCount  ? `${companyCount}`  : "3",  label: "Companies Worked"  },
+    { number: "10+",                                     label: "Apps Shipped"      },
   ];
 
   return (

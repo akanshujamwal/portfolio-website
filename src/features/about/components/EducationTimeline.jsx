@@ -58,6 +58,9 @@ export default function EducationTimeline() {
                         <h3 className="text-white font-semibold text-lg group-hover:text-indigo-400 transition-colors">
                           {edu.degree}
                         </h3>
+                        {edu.fieldOfStudy && (
+                          <p className="text-gray-500 text-xs mt-0.5">{edu.fieldOfStudy}</p>
+                        )}
                         <div className="flex items-center gap-2 mt-1">
                           {edu.website ? (
                             <a

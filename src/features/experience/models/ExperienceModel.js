@@ -11,8 +11,8 @@
 function tsToDate(ts) {
     if (!ts) return null;
     if (ts?.toDate) return ts.toDate();
-    // Handles the serialized format from JSON.stringify: { seconds, nanoseconds }
     if (ts?.seconds) return new Date(ts.seconds * 1000);
+    if (typeof ts === "string" && /^\d{4}-\d{2}-\d{2}/.test(ts)) return new Date(ts);
     return null;
   }
   
