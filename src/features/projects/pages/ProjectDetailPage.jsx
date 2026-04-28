@@ -1,12 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useProjectById, useProjects } from "../../../core/firebase/useFirestore";
-
-const statusColors = {
-  Completed:      "bg-green-500/10 text-green-400 border border-green-500/20",
-  "In Progress":  "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20",
-  Ongoing:        "bg-blue-500/10 text-blue-400 border border-blue-500/20",
-  Paused:         "bg-gray-500/10 text-gray-400 border border-gray-500/20",
-};
+import { statusColors } from "../constants/projectColors";
 
 export default function ProjectDetailPage() {
   const { id }     = useParams();
@@ -63,7 +57,7 @@ export default function ProjectDetailPage() {
 
           {/* Badges */}
           <div className="flex flex-wrap items-center gap-2 mb-5">
-            <span className={`text-xs font-semibold px-3 py-1 rounded-full ${statusColors[project.statusLabel] ?? "bg-gray-800 text-gray-400 border border-gray-700"}`}>
+            <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${statusColors[project.statusLabel] ?? "bg-gray-800 text-gray-400 border-gray-700"}`}>
               {project.statusLabel}
             </span>
             {project.isCompany && (

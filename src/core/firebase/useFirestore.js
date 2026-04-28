@@ -1,17 +1,3 @@
-// useFirestore.js — custom React hooks for every collection.
-//
-// WHY CUSTOM HOOKS?
-// A custom hook is just a function that starts with "use" and uses
-// other React hooks inside it. It lets us reuse stateful logic.
-//
-// Each hook:
-//   1. Creates data, loading, error state
-//   2. Fetches from Firestore on mount (useEffect)
-//   3. Returns { data, loading, error } for the component to use
-//
-// Components use them like this:
-//   const { data: projects, loading, error } = useProjects();
-
 import { useState, useEffect } from "react";
 import {
   getProfile,
@@ -30,9 +16,6 @@ import {
   getTestimonials,
 } from "./firestoreService";
 
-// ─── Generic hook factory ─────────────────────────────────────
-// Creates a hook that calls any async fetch function.
-// deps = dependency array for useEffect (e.g. [id] for detail pages)
 function useFirestoreData(fetchFn, deps = []) {
   const [data, setData]       = useState(null);
   const [loading, setLoading] = useState(true);
@@ -56,12 +39,10 @@ function useFirestoreData(fetchFn, deps = []) {
 
     fetch();
     return () => { cancelled = true; }; // cleanup on unmount
-  }, deps);
+  }, deps); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { data, loading, error };
 }
-
-// ─── Exported hooks ───────────────────────────────────────────
 
 export function useProfile() {
   return useFirestoreData(getProfile, []);
@@ -99,7 +80,6 @@ export function useFeaturedProjects() {
   return useFirestoreData(getFeaturedProjects, []);
 }
 
-// Detail page hooks — depend on id from URL params
 export function useProjectById(id) {
   return useFirestoreData(() => getProjectById(id), [id]);
 }

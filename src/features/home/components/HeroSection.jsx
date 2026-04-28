@@ -5,7 +5,7 @@ export default function HeroSection() {
 
   if (loading) {
     return (
-      <section className="min-h-screen flex items-center bg-gray-950 pt-16">
+      <section className="relative min-h-screen flex items-center bg-gray-950 pt-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
           <div className="max-w-3xl animate-pulse space-y-4">
             <div className="h-4 w-32 bg-gray-800 rounded-full" />
@@ -28,7 +28,7 @@ export default function HeroSection() {
   const hasSocialLinks = Object.keys(profile.socialLinks ?? {}).length > 0;
 
   return (
-    <section className="min-h-screen flex items-center bg-gray-950 pt-16">
+    <section className="relative min-h-screen flex items-center bg-gray-950 pt-16">
       {/* Subtle background grid pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
 

@@ -6,7 +6,7 @@ export default function AboutHero() {
 
   if (profileLoading || contactLoading) {
     return (
-      <section className="bg-gray-950 pt-32 pb-20">
+      <section className="relative bg-gray-950 pt-32 pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-10 animate-pulse">
             <div className="w-44 h-44 rounded-2xl bg-gray-800 flex-shrink-0" />
@@ -34,7 +34,7 @@ export default function AboutHero() {
     : Object.entries(profile.socialLinks ?? {}).map(([platform, url]) => ({ platform, url, label: platform }));
 
   return (
-    <section className="bg-gray-950 pt-32 pb-20">
+    <section className="relative bg-gray-950 pt-32 pb-20">
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-10 pointer-events-none" />
 

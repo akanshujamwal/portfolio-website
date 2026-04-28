@@ -1,7 +1,3 @@
-// Navbar — fixed top navigation bar.
-// useState is a React Hook — it lets us store & toggle values inside a component.
-// Here we use it to track whether the mobile menu is open or closed.
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useProfile } from "../../core/firebase/useFirestore";
