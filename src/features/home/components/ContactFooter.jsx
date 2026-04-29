@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useProfile, useContact } from "../../../core/firebase/useFirestore";
 
 export default function ContactFooter() {
@@ -99,10 +100,15 @@ export default function ContactFooter() {
               </div>
             )}
 
-            {/* Copyright */}
-            <p className="text-gray-600 text-sm">
-              © {year} {name}. All rights reserved.
-            </p>
+            {/* Copyright + legal links */}
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-gray-600">
+              <p>© {year} {name}. All rights reserved.</p>
+              <span className="hidden sm:inline">·</span>
+              <div className="flex items-center gap-4">
+                <Link to="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
+                <Link to="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

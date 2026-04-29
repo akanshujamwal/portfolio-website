@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { useProfile, useContact } from "../../../core/firebase/useFirestore";
 
@@ -12,6 +13,7 @@ export default function ContactPage() {
 
   const formRef = useRef();
   const [form,    setForm]    = useState({ name: "", email: "", subject: "", message: "" });
+  const [agreed,  setAgreed]  = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error,   setError]   = useState("");
@@ -56,6 +58,7 @@ export default function ContactPage() {
       );
       setSuccess(true);
       setForm({ name: "", email: "", subject: "", message: "" });
+      setAgreed(false);
     } catch (err) {
       setError("Something went wrong. Please try again or email me directly.");
     } finally {
@@ -235,9 +238,38 @@ export default function ContactPage() {
                     </div>
                   )}
 
+                  {/* Agreement checkbox */}
+                  <label className="flex items-start gap-3 cursor-pointer select-none group">
+                    <div className="relative flex-shrink-0 mt-0.5">
+                      <input
+                        type="checkbox"
+                        checked={agreed}
+                        onChange={(e) => setAgreed(e.target.checked)}
+                        className="sr-only peer"
+                      />
+                      <div className="w-5 h-5 rounded border border-gray-600 peer-checked:border-indigo-500 peer-checked:bg-indigo-600 bg-gray-950 transition-all duration-200 flex items-center justify-center">
+                        {agreed && (
+                          <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
+                      </div>
+                    </div>
+                    <span className="text-gray-400 text-sm leading-snug">
+                      I agree to the{" "}
+                      <Link to="/privacy" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+                        Privacy Policy
+                      </Link>{" "}
+                      and{" "}
+                      <Link to="/terms" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">
+                        Terms of Service
+                      </Link>
+                    </span>
+                  </label>
+
                   <button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || !agreed}
                     className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-600/50 disabled:cursor-not-allowed text-white font-semibold px-8 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/25 flex items-center justify-center gap-2"
                   >
                     {loading ? (

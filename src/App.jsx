@@ -12,6 +12,8 @@ const BlogPostPage      = lazy(() => import("./features/blog/pages/BlogPostPage"
 const TestimonialsPage  = lazy(() => import("./features/testimonial/pages/TestimonialsPage"));
 const ContactPage       = lazy(() => import("./features/contact/pages/ContactPage"));
 const NotFoundPage      = lazy(() => import("./features/notfound/pages/NotFoundPage"));
+const PrivacyPolicyPage = lazy(() => import("./features/legal/pages/PrivacyPolicyPage"));
+const TermsOfServicePage = lazy(() => import("./features/legal/pages/TermsOfServicePage"));
 
 function PageLoader() {
   return (
@@ -36,6 +38,8 @@ function App() {
             <Route path="/blog/:id"     element={<BlogPostPage />}      />
             <Route path="/testimonials" element={<TestimonialsPage />}  />
             <Route path="/contact"      element={<ContactPage />}       />
+            <Route path="/privacy"      element={<PrivacyPolicyPage />} />
+            <Route path="/terms"        element={<TermsOfServicePage />}/>
             <Route path="*"             element={<NotFoundPage />}      />
           </Routes>
         </Suspense>
